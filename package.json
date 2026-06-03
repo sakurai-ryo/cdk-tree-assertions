@@ -1,0 +1,56 @@
+{
+  "name": "cdk-tree-assertions",
+  "version": "0.0.0",
+  "description": "Type-safe, intent-level assertions for the AWS CDK construct tree.",
+  "keywords": [
+    "assertions",
+    "aws-cdk",
+    "cdk",
+    "constructs",
+    "testing",
+    "type-safe"
+  ],
+  "homepage": "https://github.com/sakurai-ryo/cdk-tree-assertions#readme",
+  "bugs": {
+    "url": "https://github.com/sakurai-ryo/cdk-tree-assertions/issues"
+  },
+  "license": "MIT",
+  "author": "sakurai-ryo",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sakurai-ryo/cdk-tree-assertions.git"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.mjs",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "vp pack",
+    "dev": "vp pack --watch",
+    "test": "vp test",
+    "check": "vp check",
+    "gen:iam-actions": "node scripts/gen-iam-actions.ts",
+    "prepublishOnly": "vp run build"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.2",
+    "@typescript/native-preview": "7.0.0-dev.20260509.2",
+    "aws-cdk-lib": "^2",
+    "bumpp": "^11.1.0",
+    "constructs": "^10.0.0",
+    "typescript": "^6.0.3",
+    "vite-plus": "catalog:"
+  },
+  "peerDependencies": {
+    "aws-cdk-lib": "^2",
+    "constructs": "^10.0.0"
+  },
+  "packageManager": "pnpm@11.5.1"
+}

@@ -1,0 +1,10 @@
+node_modules
+dist
+*.log
+.DS_Store
+
+# Working documentation — kept out of git intentionally
+docs/
+!.vscode/
+!.vscode/settings.json
+!.vscode/extensions.json
