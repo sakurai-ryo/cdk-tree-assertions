@@ -21,9 +21,7 @@ export function toConstruct(value: SubjectOrConstruct): IConstruct {
 export function securityGroupIdsOf(construct: IConstruct, index: ConstructIndex): Set<string> {
   const ids = new Set<string>();
 
-  const connections = (construct as { connections?: { securityGroups?: IConstruct[] } })
-    .connections;
-  for (const sg of connections?.securityGroups ?? []) {
+  for (const sg of securityGroupsFromConnections(construct)) {
     const def = sg.node?.defaultChild;
     if (def && CfnResource.isCfnResource(def)) {
       addId(ids, index.tryLogicalIdOf(def));
@@ -37,6 +35,20 @@ export function securityGroupIdsOf(construct: IConstruct, index: ConstructIndex)
   }
 
   return ids;
+}
+
+/**
+ * `connections.securityGroups`, tolerating getters that throw — e.g. a
+ * non-VPC Lambda's `connections` throws instead of returning undefined.
+ */
+function securityGroupsFromConnections(construct: IConstruct): IConstruct[] {
+  try {
+    const connections = (construct as { connections?: { securityGroups?: IConstruct[] } })
+      .connections;
+    return connections?.securityGroups ?? [];
+  } catch {
+    return [];
+  }
 }
 
 function addId(set: Set<string>, id: string | undefined): void {

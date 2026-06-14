@@ -38,6 +38,11 @@ export class ConstructIndex {
     }
   }
 
+  /** The wrapped `assertions.Template` (the single source of resolved JSON). */
+  public get template(): Template {
+    return this._template;
+  }
+
   /** The full resolved CloudFormation template as JSON. */
   public get templateJson(): { [key: string]: any } {
     if (!this._json) {

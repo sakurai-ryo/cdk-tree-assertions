@@ -74,11 +74,11 @@ function walk(obj: any, found: string[]): void {
  * statement action `s3:GetObject`.
  */
 export function actionMatches(requested: string, statementAction: string): boolean {
-  return wildcardMatch(statementAction, requested) || wildcardMatch(requested, statementAction);
+  return wildcardCovers(statementAction, requested) || wildcardCovers(requested, statementAction);
 }
 
-/** Whether `pattern` (which may contain `*`/`?`) matches the literal `value`. */
-function wildcardMatch(pattern: string, value: string): boolean {
+/** Whether `pattern` (which may contain `*`/`?`) matches the literal `value`. One-directional. */
+export function wildcardCovers(pattern: string, value: string): boolean {
   if (pattern === "*") {
     return true;
   }
